@@ -1,47 +1,52 @@
-==============
-City Locations
-==============
+# Django City Location Package
 
-City Locations is a Django app that can be installed in an existing Django project
-Documentation: https://toddpy-django-cityloc-pkg.readthedocs.io/en/latest/
+A reusable Django app for managing city location data with geolocation features, including geocoding and reverse geocoding using **geopy**.
 
-Installation
-------------
+## Features
+- Manage cities with geolocation data (latitude, longitude).
+- Geocode city names to geographic coordinates using **geopy**.
+- Reverse geocode coordinates back to city names.
+- Simple integration with Django ORM.
 
-1. Add "citylocations" to your INSTALLED_APPS setting in settings.py:
-    INSTALLED_APPS = [
-        ...
-        'citylocations',
-    ]
+## Tech Stack
 
-2. Include the citylocations URLconf in your project urls.py like this::
+- **Django**: Web framework for building the app.
+- **geopy**: For geocoding and reverse geocoding.
+- **Python**: Programming language for backend logic.
+- **SQL**: Database supported by Django ORM.
 
-    path('', include('citylocations.urls')),
+## Installation
+1. Install the package:
+   ```
+   pip install django-cityloc
+    ```
 
-3. Start the development server and visit http://127.0.0.1:8000/
-In the django_cityloc_pkg/ folder, create a file named setup.cfg and add the content below.
-The setup.cfg file defines the parameters that are used to build your package. These parameters are also used by installation tools to verify dependencies, and used to document supported usages in PyPI.
-
-setup.cfg content:
-
-[metadata]
-    name = django_cityloc_pkg_hm-pfeiffer
-    version = 0.0.1
-    description = A Django app about city locations
-    author = Author Name
-    author_email = authoremail@example.com
-    classifiers =
-        Environment :: Web Environment
-        Framework :: Django
-        Framework :: Django :: 3.2
-        License :: OSI Approved :: MIT License
-        Operating System :: OS Independent
-        Programming Language :: Python :: 3.9    
+## Usage 
+    1. Creating a City 
+    ```
+    from cityloc.models import City
     
-    [options]
-    include_package_data = true
-    packages = find:
-    python_requires = >=3.8
-    install_requires =
-        Django >= 3.2
-            
+    # Create a city with geolocation
+    city = City.objects.create(name="New York")
+
+    ```
+
+    2. Geocoding 
+    ```
+    city = City.objects.get(name="New York")
+    geolocation = city.get_geolocation()
+    print(geolocation)  # {'latitude': 40.7128, 'longitude': -74.0060}
+
+    ```
+
+    3. Reverse Geocoding 
+    ```
+    city_name = City.get_city_from_coordinates(40.7128, -74.0060)
+    print(city_name)  # "New York"
+
+    ```
+
+## Running Test
+```
+python manage.py test cityloc
+```
