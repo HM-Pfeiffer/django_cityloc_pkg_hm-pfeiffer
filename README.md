@@ -22,7 +22,7 @@ A reusable Django app for managing city location data with geolocation features,
     ```
 
 ## Usage 
-    1. Creating a City 
+ 1. Creating a City 
     ```
     from cityloc.models import City
     
@@ -31,7 +31,7 @@ A reusable Django app for managing city location data with geolocation features,
 
     ```
 
-    2. Geocoding 
+ 2. Geocoding 
     ```
     city = City.objects.get(name="New York")
     geolocation = city.get_geolocation()
@@ -39,7 +39,7 @@ A reusable Django app for managing city location data with geolocation features,
 
     ```
 
-    3. Reverse Geocoding 
+ 3. Reverse Geocoding 
     ```
     city_name = City.get_city_from_coordinates(40.7128, -74.0060)
     print(city_name)  # "New York"
